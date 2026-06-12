@@ -112,3 +112,65 @@ Explanation:
 =================================================
 
 """
+class shape:
+    def __init__(self,name):
+        self.name=name
+
+    def area(self):
+        raise NotImplementedError("Area not implemented" )
+    
+    def perimeter(self):
+        raise NotImplementedError("perimeter not implemeted")
+    
+    def describe(self):
+        print(f"{self.name}:area={self.area()},perimeter={self.perimeter()}")
+
+class circle(shape):
+    def __int__(self,radius):
+        super.__init__("circle")
+        self.radius=radius
+    
+    def area(self):
+        return 3.14*self.radius*self.radius
+    
+    def perimeter(self):
+        return 2 * 3.14*self.radius
+    
+class rectangle(shape):
+    def __int__(self,length,width):
+        super.__init__("rectangle")
+        self.length=length
+        self.width=width
+    
+    def area(self):
+        return self.length*self.width
+    
+    def perimeter(self):
+        return 2*(self.length+self.hight)
+    
+class triangle(shape):
+    def __init__(self,a,b,c):
+        super().__init__("triangle")
+        self.a=a
+        self.b=b
+        self.c=c
+
+    def area(self):
+        s=(self.a+self.b+self.c)/2
+        return (s*(s-self.a)*(s-self.b)*(s-self.c))**0.5
+    
+    def perimeter(self):
+        return self.a+self.b+self.c
+    
+
+#input
+shapes=[circle(5),rectangle(4,6),triangle(3,4,5)]
+#polymorphism
+for shape in shapes:
+    shape.describe()
+
+try:
+    shape=shape("shape")
+    shape.describe()
+except NotImplementedError:
+    print("shap itself raises NotImplementedError when describe()n is called")

@@ -155,3 +155,72 @@ Team total salary -> 173250.0 + 105000.0 + 84000.0
 =================================================
 
 """
+class person:
+    def __init__(self,name,age):
+        self.name=name
+        self.age=age
+
+    def introduce(self):
+        print(f"Hi, I'm{self.name},age{self.age}")
+
+    @classmethod
+    def is_adult(age):
+        return age>=18
+
+class Employee(person):
+    company="Acme corp"
+    bonus_percent=5
+
+    def __init__(self,name,emp_id,salary,age):
+        super().__init__(name,age)
+        self.emp_id=emp_id
+        self.salary=salary
+
+    def introduce(self):
+        super().introduce()
+        print(f"I work at {Employee.company}as id{self.emp_id}")
+
+    def apply_bonus(self):
+        self.salary+=self.salary+(Employee.bonus_percent/100)
+        print(f"{self.name}salary->{self.salary}")
+
+    @classmethod
+    def set_bonus(cls,percent):
+        cls.bonus_percent=percent
+
+class manager(Employee):
+    def __init__(self,name,age,emp_id,salary, team=None):
+        super().__init__(name,age,emp_id,salary)
+        self.team=[]
+
+        def add_member(self,employee):
+            self.team.append(employee)
+
+        def introduce(self):
+            super().introduce()
+            print(f"I lead a team of {len(self.team)}people.")
+
+#input
+p=person("sam",17)
+e1=Employee("Alice",25,"E001",100000)
+e2=Employee("Bod",30,"E002",80000)
+m=manager("carol",40,"M001",150000,[])
+m.add_member(e1)
+m.add_member(e2)
+
+p.introduce()
+print()
+e1.introduce()
+print()
+e2.introduce()
+print()
+m.introduce()
+print()
+e1.apply_bonus()
+e2.apply_bonus()
+m.apply_bonus()
+Employee.set_bonus(10)
+m.apply_bonus()
+print()
+print("is_adult(17)->",person.is_adult(17))
+print("is_adult(25)->",person.is_adult(25))
