@@ -96,3 +96,41 @@ is_valid_salary("abc")  -> False
 =================================================
 
 """
+class Employee:
+    raise_pct=5
+
+    def __init__(self,name,salary):
+        self.name=name
+        self.salary=float(salary)
+    
+    def apply_raise(self):
+        self.salary+=self.salary*(Employee.raise_pct/100)
+        print(f"{self.name}->{self.salary}")
+
+    @classmethod
+    def set_raise_pct(cls,percent):
+        cls.raise_pct=percent
+
+    @classmethod
+    def from_string(cls,emp_str):
+        name,salary=emp_str.split(",")
+        return cls(name,float(salary))
+    
+    @staticmethod
+    def is_valid_salary(value):
+        return isinstance(value,(int,float)) and value>=0
+    
+#input
+e1=Employee("Alice",100000)
+e2=Employee("Bod",80000)
+e3=Employee.from_string("carol,75000")
+
+e1.apply_raise()#5% raise
+Employee.set_raise_percentage(10)
+e2.apply_raise()#10% raise
+e3.apply_raise()#10% raise
+
+#output
+print("is_valid_salary(50000)->",Employee.is_valid_salary(50000))
+print("is_valid_salary(-100)->",Employee.is_valid_salary(-100))
+print("is-valid_salary(abc)->",Employee.is_valid_salary("abc"))   
